@@ -1,0 +1,62 @@
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 50%;
+}
+
+.text{
+        font-family: 'Irvin', sans-serif;
+        font-size: 18px;
+        text-align: center;
+        color:white;
+        padding-bottom: 50px;
+}
+
+@font-face {
+    font-family: "Irvin";
+    src: url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.eot"); 
+    src: url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.eot?#iefix") 
+    format("embedded-opentype"), url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.woff2") 
+    format("woff2"), url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.woff") 
+    format("woff"), url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.ttf") 
+    format("truetype"), url("//db.onlinewebfonts.com/t/1e44faec07b8b81f60a3215d76bd0086.svg#Irvin") 
+    format("svg"); 
+}
+
+body{
+	 background-color: #DCAA94;
+}
+#chart{
+    margin-left: 1vh;
+    font-family: 'Irvin',sans-serif;
+    font-size: 2vh;
+    text-align: center;
+    padding-bottom:5vh;
+    padding-top:10vh;
+}
+#desc{
+      font-family: 'Irvin', sans-serif;
+       margin-left: 1vh;
+       width: inherit;
+       padding-right: 2vh;
+       padding-top:5vh;
+       font-size: 18px;
+}
+/* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: grey;
+}
+
+/* mouse over link */
+a:hover {
+  color: yellow;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
