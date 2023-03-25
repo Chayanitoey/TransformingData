@@ -1,0 +1,96 @@
+<html>
+<head>
+<title> trees of knowledge: searching arrays of objects and arrays of arrays</title>
+<style>
+body {
+    margin: 0;
+}    
+#title {
+width: 400px;
+text-align: right;
+margin: 10px;
+}
+#wrapper {
+     width: 900px;
+     margin: 0 auto;
+}
+#leftcolumn, #rightcolumn {
+    border: 1px solid black;
+    float: left;
+    font-family: "Geneva";
+    margin: 10px;
+    padding: 5px;
+    font-size: 13px;
+/*     min-height: 450px; */
+}
+#clickResults, #inputResults {
+font-size: 11px;
+padding: 5px;
+}
+#leftcolumn {
+     width: 400px;
+}
+#rightcolumn {
+     width: 400px;
+}
+
+</style>
+
+
+<!-- ####SETTING UP/LOADING THE TEXTS ~~ DO NOT MODIFY#### -->
+<script>
+//TEXT VARIABLES AS GLOBALS
+	
+var hamlet;
+var hdi;
+</script>
+<!-- LOADING THE TEXTS FROM THE js DOCUMENTS-->
+
+<script src="hamlet.js"></script>
+<script src="hdi2022.js"></script>
+<script>
+// transforming the CSV into an array rows with nested arrays of columns
+var hdiArray = hdi.split('\n')
+
+//
+ for (var i=0;i < hdiArray.length;i++) {
+ 	hdiArray[i] = hdiArray[i].slice(1,-1).replace('" ','"').split('","');
+ }
+</script>
+<!-- LOADING THE FUNCTIONS FROM THE DOCUMENT functions.js-->
+<script src="functions.js"></script>
+
+</head>
+
+<body>
+<!-- THIS IS WHAT WE WILL SEE ON THE SCREEN ~~ DO NOT MODIFY -->
+<div id="title"><B>Text Search Assignment</B><BR><BR></div>
+<div id="wrapper">
+<!-- THESE ARE THE BUTTONS ON THE LEFT SIDE: USE THE FUNCTION NAMES AFTER onclick="... -->
+<div id="leftcolumn"> Search Hamlet Object<BR>
+<button id="btnSearch" onclick="linesHamlet()"> Lines spoken by Hamlet</button><BR>
+<button id="btnSearch" onclick="linesOphelia()"> Lines spoken by Ophelia</button><BR>
+<button id="btnSearch" onclick="Gertrude10lines()"> the first 10 lines spoken by Gertrude</button><BR>
+<button id="btnSearch" onclick="longest()"> the longest speech</button><BR>
+<button id="btnSearch" onclick="shortestWho()"> the shortest line, and who speaks it</button><BR>
+<button id="btnSearch" onclick="myHamlet()"> your own search</button><BR>
+<div id="inputResults">Results will go here </div>
+</div>
+
+<!-- THESE ARE THE BUTTONS ON THE RIGHT SIDE: USE THE FUNCTION NAMES AFTER onclick="... -->
+
+<div id="rightcolumn"> Search Human Development Index tables<BR>
+<button id="btnSearch" onclick="Sweden2000()">HDI in Sweden in 2000</button><BR>
+<button id="btnSearch" onclick="Sweden2010()">HDI in Sweden in 2010</button><BR>
+<button id="btnSearch" onclick="S2000and2010()"> the difference between those scores (2000 and 2010)</button><BR>
+<button id="btnSearch" onclick="Finland()">the difference between Finland and Sweden 2010</button><BR>
+<button id="btnSearch" onclick="highestHDI()"> the country with the highest HDI in 2010</button><BR>
+<button id="btnSearch" onclick="myHDI()"> your own search</button><BR>
+<div id="clickResults">Results will go here</div>
+</div>
+</div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,227 @@
+<!-- modify from https://github.com/skeate/Leaflet.timeline  -->
+
+<html>
+  <head>
+    <title>Time Project</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>    <!--<script src="./leaflet.timeline.js"></script>-->
+
+    <style>
+    
+    
+      @import url(https://fonts.googleapis.com/css?family=Montserrat);
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", normal;
+      }
+
+      #map {
+        position: fixed;
+        top: 0;
+        left: 50vw;
+        bottom: 0;
+        right: 0;
+          cursor: url(https://cur.cursors-4u.net/mechanics/mec-4/mec305.cur), 
+     auto !important;
+      }
+      .leaflet-bottom.leaflet-left {
+        width: 100%;
+      }
+      .leaflet-control-container .leaflet-timeline-controls {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+      body {
+     cursor: 
+     url(https://cur.cursors-4u.net/mechanics/mec-4/mec305.cur), 
+     auto !important;
+      }
+      
+    
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/masajid390/BeautifyMarker/master/leaflet-beautify-marker-icon.csshttps://raw.githubusercontent.com/masajid390/BeautifyMarker/master/leaflet-beautify-marker-icon.css">
+    <script src="https://raw.githubusercontent.com/masajid390/BeautifyMarker/master/leaflet-beautify-marker-icon.js"></script>
+  </head>
+  <body>
+    
+    <div id="info">
+
+      
+
+    <ul id="displayed-list"></ul>
+    <div id="app">
+    </div>
+
+    <script src="p5.min.js"></script>
+    <!--<script src="tweakpane.min.js"></script>-->
+    <script src="sketch.js"></script>
+    <div id = "container1">
+    </div>
+    
+    </div>
+    <div id="map"></div>
+
+    <script>
+      
+var map = new L.Map('map');
+
+
+// Center map and default zoom level
+map.setView([0,0], 3);
+L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png", {
+attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attribution/">CartoDB</a>',
+subdomains: "abcd",
+maxZoom: 18
+ }).addTo(map);
+ 
+       
+// customize all the markers
+var tokyo = L.icon({
+    iconUrl: './assets/Tokyo.png ',
+    iconSize: [50, 50]
+    });
+var makerTokyo = L.marker([35.6762,139.6503],{icon: tokyo}).addTo(map);
+
+var paris = L.icon({
+    iconUrl: './assets/Paris.png ',
+    iconSize: [50, 50]
+    });
+var makerParis = L.marker([  48.8566,2.3522],{icon: paris}).addTo(map);
+
+var bangkok = L.icon({
+    iconUrl: './assets/Bangkok.png ',
+    iconSize: [50, 50]
+    });
+var makerBangkok= L.marker([ 13.7563,100.5018],{icon: bangkok}).addTo(map);
+
+var london = L.icon({
+    iconUrl: './assets/London.png ',
+    iconSize: [50, 50]
+    });
+var makerLondon= L.marker([51.5072,-0.1276],{icon: london}).addTo(map);
+
+var newyork = L.icon({
+    iconUrl: './assets/NewYork.png ',
+    iconSize: [50, 50]
+    });
+var makerNewYork= L.marker([ 40.7128,-74.006],{icon: newyork}).addTo(map);
+
+var sanFrancisco = L.icon({
+    iconUrl: './assets/SanFrancisco.png ',
+    iconSize: [50, 50]
+    });
+var makerSanFrancisco= L.marker([ 37.7749,-122.4194],{icon: sanFrancisco}).addTo(map);
+
+
+// set time change
+var timeChange = 0
+
+// function to chang time on the clock
+function onEachFeature(feature, layer) {
+  // if we need pop-up we can add .bindPopup('cityName : ' + feature.properties.name )
+  layer.on('click', (data) => {
+    var city = data.target.feature.properties.name
+    // timeChange = 
+    if (city === 'Paris'){
+       timeChange = 6
+    }
+    else if (city === 'Tokyo'){
+      timeChange = 14
+    }
+     else if (city === 'London'){
+      timeChange = 5
+    }
+     else if (city === 'Bangkok'){
+      timeChange = 12
+    }
+    else if (city === 'San Francisco'){
+      timeChange = -3
+    }
+    else if (city === 'New York'){
+      timeChange = 0
+    }
+    
+  })
+}
+
+
+async function load_shapefile() {
+      let url = 'https://raw.githubusercontent.com/Chayanitoey/timeproject/main/map.geojson';
+      const response = await fetch(url)
+      const shape_obj = await response.json();
+      console.log(shape_obj);
+      return shape_obj;
+    }
+
+    load_shapefile().then((data) => {
+      // console.log('asfsfsdf', data)
+
+      L.geoJSON(data, { onEachFeature })
+        .addTo(map);
+    })
+    
+
+
+    </script>
+
+ <!--time zone API  -->
+    <script>
+    
+// I decided not to use this but maybe could be useful for the next iterations 
+    
+var daysofweek = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']
+// const jsdom = require("jsdom");
+// const { JSDOM } = jsdom;
+// global.document = new JSDOM('test.html').window.document;
+
+
+function currentlocaltime(divid, loc){
+var container = document.getElementById(divid)
+var targetDate = new Date() // Current date/time of user computer
+var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+var apikey = 'AIzaSyCKY4eMGjS0o3gfhDlhv7qd6PIGaEg4Dwc'
+var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+ import XMLHttpRequest from 'xhr2';
+ 
+var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+xhr.open('GET', apicall) // open GET request
+xhr.onload = function(){
+    if (xhr.status === 200){ // if Ajax request successful
+        var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+        console.log(output.status) // log API return status for debugging purposes
+        if (output.status == 'OK'){ // if API reports everything was returned successfully
+            var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+            var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of Tokyo (timestamp + dstOffset + rawOffset)
+            console.log(localdate.toLocaleString()) // Display current Tokyo date and time
+        }
+    }
+    else{
+        alert('Request failed.  Returned status of ' + xhr.status)
+    }
+}
+xhr.send() 
+}
+ 
+document.getElementById('tokyotime').innerHTML = currentlocaltime('tokyotime', '35.731252, 139.730291');
+
+// currentlocaltime('latime', '34.052046, -118.259335')
+// currentlocaltime('torontotime', '43.656090, -79.387679')
+// currentlocaltime('paristime', '48.856805, 2.348242')
+
+</script>
+<a href="https://www.cursors-4u.com/cursor/2009/04/04/yakovlev-yak-28p-firebar-military-jet.html" target="_blank" title="Yakovlev Yak-28P Firebar Military Jet">
+<img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="Yakovlev Yak-28P Firebar Military Jet" style="position:absolute; top: 0px; right: 0px;" /></a>
+        
+  </body>
+</html>
